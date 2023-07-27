@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-07-27T07:17:19.114Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="r11Vfh7vOzftkUwBXM6_" version="21.6.5" type="github">
+<mxfile host="app.diagrams.net" modified="2023-07-27T07:20:31.893Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="de0tVxIU2kAkOgOOKhG1" version="21.6.5" type="github">
   <diagram name="Page-1" id="2J_7a3xgTHMmJyV9-Q0-">
     <mxGraphModel dx="1050" dy="534" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -92,7 +92,7 @@
           <mxGeometry y="26" width="200" height="174" as="geometry" />
         </mxCell>
         <mxCell id="96zS_yrBO5pZcuRgu4h7-36" value="Salle" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="40" y="440" width="200" height="200" as="geometry" />
+          <mxGeometry x="40" y="440" width="200" height="220" as="geometry" />
         </mxCell>
         <mxCell id="96zS_yrBO5pZcuRgu4h7-37" value="+ ListVisites: List&amp;lt;Visites&amp;gt;&lt;br&gt;&lt;br&gt;+ ListObservers: List&amp;lt;Hopital&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="96zS_yrBO5pZcuRgu4h7-36">
           <mxGeometry y="26" width="200" height="54" as="geometry" />
@@ -100,8 +100,8 @@
         <mxCell id="96zS_yrBO5pZcuRgu4h7-38" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="96zS_yrBO5pZcuRgu4h7-36">
           <mxGeometry y="80" width="200" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="96zS_yrBO5pZcuRgu4h7-39" value="+ Attach(Hopital): void&lt;br&gt;&lt;br&gt;+ Detach(Hopital): void&lt;br&gt;&lt;br&gt;+ Notify(): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="96zS_yrBO5pZcuRgu4h7-36">
-          <mxGeometry y="88" width="200" height="112" as="geometry" />
+        <mxCell id="96zS_yrBO5pZcuRgu4h7-39" value="+ Attach(Hopital): void&lt;br&gt;&lt;br&gt;+ Detach(Hopital): void&lt;br&gt;&lt;br&gt;+ Notify(): void&lt;br&gt;&lt;br&gt;+ SaveVisites(List&amp;lt;Visites&amp;gt;): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="96zS_yrBO5pZcuRgu4h7-36">
+          <mxGeometry y="88" width="200" height="132" as="geometry" />
         </mxCell>
         <mxCell id="96zS_yrBO5pZcuRgu4h7-40" value="Hopital" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="320" y="440" width="200" height="86" as="geometry" />
