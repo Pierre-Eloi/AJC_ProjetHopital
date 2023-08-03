@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace ProjetHopital
         public void Notify()
         {
             Patients patient = Hopital.Update();
-            AddVisitor(patient.Id);
+            this.AddVisitor(patient.Id);
         }
 
         public void AddVisitor(int id)
@@ -43,24 +44,34 @@ namespace ProjetHopital
             visitor.Médecin = this.DocName;
             visitor.Tarif = 23;
 
-            if (ListeVisites.Count == 10)
+            if (ListeVisites.Count >= 10)
             {
-                this.SaveVisites();
-                ListeVisites = new List<Visites>();
+                if (this.SaveVisites())
+                    ListeVisites = new List<Visites>();
             }
             ListeVisites.Add(visitor);
         }
 
-        public void SaveVisites()
+        public bool SaveVisites()
         {
             //var dao = new DAOVisites();
-            if (ListeVisites.Count > 0)
+            var isSuccess = false;
+            try
             {
-                foreach (Visites v in ListeVisites)
+                if (ListeVisites.Count > 0)
                 {
-                    //dao.insert(v)
+                    foreach (Visites v in ListeVisites)
+                    {
+                        //dao.insert(v)
+                    }
+                    isSuccess = true;
                 }
-            }            
+            }
+            catch (SqlException e)
+            {
+                isSuccess = false;
+            }
+            return isSuccess;            
         }
     }
 }
