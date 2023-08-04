@@ -27,8 +27,8 @@ namespace ProjetHopital
 
         public Patients Update()
         {
-            Patients patient = new Patients();
-            if (FileAttente.Dequeue() is object)
+            Patients patient = null;
+            if (FileAttente.Count > 0)
                 patient = FileAttente.Dequeue();
             return patient;
         }
@@ -46,7 +46,7 @@ namespace ProjetHopital
                 res += $"Nom : {p.Nom}\n" +
                    $"Prénom : {p.Prenom}\n" +
                    $"Age : {p.Age} ans\n" +
-                   $"******************************";
+                   $"------------------------------\n";
             }               
             return res;
         }
@@ -58,7 +58,7 @@ namespace ProjetHopital
         public string GetQueue()
         {
             var res = $"Nombre de patients : {FileAttente.Count}\n" +
-                $"------------------------------";
+                $"------------------------------\n";
             foreach (Patients p in FileAttente)
                 res += GetInfo(p);
             return res;
