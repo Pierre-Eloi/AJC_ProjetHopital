@@ -34,6 +34,47 @@ namespace ProjetHopital
                     break;
             }
         }
+        static void DocApp(int value)
+        {
+            var hopital = LoadBalancer.GetLoadBalancer();
+            Salle s =new Salle();
+            switch (value)
+            {
+                case 1:
+                    s.Notify();
+                    break;
+                case 2:
+                    hopital.GetQueue();
+                    break;
+                case 3:
+                    if(SaveVisites())
+                    {
+                        Console.WriteLine("La sauvegarde a bien été effectuée ");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Une erreur s'est produite");
+                    }
+                    break;
+                case 4:
+                    Console.WriteLine($"\nListe des visites de {s.DocName} - SALLE {s.NumSalle}");
+                    if (Liste.Count == 0)
+                    {
+                        Console.WriteLine($"Aucune visite pour vous dans la base docteur {s.DocName}");
+                    }
+                    else
+                    {
+                        foreach (Visite item in s.ListeVisites)
+                        {
+                            Console.WriteLine($"Patient: {item.IdPatient}  Date: {item.Date}  Tarif: {item.Tarif} ");
+                        }
+                    }
+                    break;
+                default:
+                    Test.Quitter();
+                    break;
+            }
+        }
 
         static bool CheckPatient(int id)
         {
