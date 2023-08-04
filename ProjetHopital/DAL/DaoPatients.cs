@@ -6,39 +6,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Projet_Hopital.DAL
+namespace ProjetHopital.DAL
 {
     public class DaoPatients
 
     {
-        public List<Patients> FindAll()
+        public IEnumerable<Patients> FindAll()
         {
             return new HopitalDBEntities().Patients.ToList<Patients>();
         }
 
-        public Patients FindByRef(int id)
+        public Patients FindById(int id)
         {
             var context = new HopitalDBEntities();
-            var a = context.Patients.Find(id);
-            return a;
+            var p = context.Patients.Find(id);
+            return p;
+        }
+
+        public Patients Create(Patients p)
+        {
+            var context = new HopitalDBEntities();
+            context.Patients.Add(p);
+            context.SaveChanges();
+            return p;
         }
 
         public Patients Delete(int id)
         {
             var context = new HopitalDBEntities();
-            var a = context.Patients.Find(id);
-            context.Patients.Remove(a);
+            var p = context.Patients.Find(id);
+            context.Patients.Remove(p);
             context.SaveChanges();
-            return a;
-        }
-
-        public Patients Create(Patients a)
-        {
-            var context = new HopitalDBEntities();
-            context.Patients.Add(a);
-            context.SaveChanges();
-            return a;
-        }
+            return p;
+        }        
 
         public Patients Update(Patients p)
         {
