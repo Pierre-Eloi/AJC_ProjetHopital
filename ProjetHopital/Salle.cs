@@ -34,12 +34,15 @@ namespace ProjetHopital
             var res = "";
             Patients p = Hopital.Update();
             if (p is object)
-            {                
+            {
                 res += $"Le patient {p.Nom} est entré dans la salle";
                 this.AddVisitor(p.Id);
+
             }
             else
                 res += "Il n'y a plus de patient, vous pouvez rentrer chez vous";
+
+
             return res;
         }
 
@@ -52,8 +55,8 @@ namespace ProjetHopital
             visitor.Médecin = this.DocName;
             visitor.Tarif = 23;
 
-            if (ListeVisites.Count >= 10 && this.SaveVisites())
-                    ListeVisites = new List<Visites>();
+            if (ListeVisites.Count >= 10)
+                this.SaveVisites();
             ListeVisites.Add(visitor);
         }
 
@@ -67,6 +70,7 @@ namespace ProjetHopital
                 {
                     foreach (Visites v in ListeVisites)
                         dao.Create(v);
+                    ListeVisites.Clear();
                     isSuccess = true;
                 }
             }
