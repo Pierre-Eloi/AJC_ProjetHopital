@@ -16,22 +16,11 @@ namespace ProjetHopital
         }
 
 
-        static void Test()
-        {
-            var v = new Visites();
-            v.IdPatient = 3;
-            v.Médecin = "MARTIN";
-            v.Date = DateTime.Now;
-            v.NumSalle = 1;
-            v.Tarif = 23;
-            Console.WriteLine($"Id: {v.Id}  IdPatient: {v.IdPatient}  Date: {v.Date}");
-            new DaoVisites().Create(v);
-        }
-
         static void Run()
         {
             var a = Login();
             ProcessMenuOption(a);
+            hopitalText();
         }
 
         static Authentification Login()
@@ -59,21 +48,33 @@ namespace ProjetHopital
             bool isSuccess = false;
             var a = new Authentification();
             do
-            {                
-                a = new DaoAuthentification().FindById(int.Parse(user["login"]));
-                loginProgress();
-                if (a != null && a.Password == user["password"])
+            {
+                try
                 {
-                    PrintMessage("Authentification réussie ! Vous pouvez entrer.");
-                    isSuccess = true;
+                    a = new DaoAuthentification().FindById(int.Parse(user["login"]));
+                    loginProgress();
+
+                    if (a != null && a.Password == user["password"])
+                    {
+                        PrintMessage("Authentification réussie ! Vous pouvez entrer.");
+                        isSuccess = true;
+                    }
+                    else
+                    {
+                        PrintMessage("Identifiant ou mot de passe incorrect.", false);
+                        user["login"] = GetUserInput("votre Identifiant");
+                        user["password"] = GetUserInput("votre mot de passe");
+                    }
                 }
-                else
+                catch (FormatException)
                 {
-                    PrintMessage("Identifiant ou mot de passe incorrect.", false);
+                    PrintMessage("Format d'identifiant incorrect. Veuillez entrer un nombre entier.", false);
+                    Console.Clear();
                     user["login"] = GetUserInput("votre Identifiant");
                     user["password"] = GetUserInput("votre mot de passe");
                 }
             } while (isSuccess == false);
+
             return a;
         }
 
@@ -114,7 +115,7 @@ namespace ProjetHopital
                         response = 0;
                     while (response != 5)
                     {
-                        DocApp(response, s);                        
+                        DocApp(response, s);
                         Console.ReadLine();
                         DisplayMedecin(a.Métier);
                         success = int.TryParse(Console.ReadLine(), out response);
@@ -130,7 +131,7 @@ namespace ProjetHopital
 
         static void SecrApp(int value, LoadBalancer hopital)
         {
-            
+
             switch (value)
             {
                 case 1:
@@ -138,8 +139,8 @@ namespace ProjetHopital
                     if (CheckPatient(id) == false)
                         CreatePatient();
                     var p = new DaoPatients().FindById(id);
-                    hopital.AddPatient(p);
-                    PrintMessage($"\nLe patient {p.Nom} a été ajouté à la file d'attente");
+                    //a voir dimanche
+                    PrintMessage(hopital.AddPatient(p));
                     break;
                 case 2:
                     Console.WriteLine($"\n{hopital.GetQueue()}");
@@ -160,13 +161,13 @@ namespace ProjetHopital
                     }
                     break;
                 default:
-                    PrintMessage("\nErreur de saisie, veuillez tapper un chiffre entre 1 et 5", false);
+                    PrintMessage("\nErreur de saisie, veuillez taper un chiffre entre 1 et 5", false);
                     break;
             }
         }
 
         static void DocApp(int value, Salle s)
-        {            
+        {
             switch (value)
             {
                 case 1:
@@ -237,7 +238,7 @@ namespace ProjetHopital
         }
 
         static void DisplayMedecin(int? numSalle)
-        {            
+        {
             var message = "--------Bienvenue dans l'Interface Médecin--------\n" +
                 $"Vous êtes dans la salle {numSalle}\n\n" +
                 "Vous pouvez réaliser les actions suivantes :\n" +
@@ -295,6 +296,15 @@ namespace ProjetHopital
             }
             Console.WriteLine(msg);
             Console.ForegroundColor = ConsoleColor.White;
+        }
+        static void hopitalText()
+        {
+            //création du fichier hopital.txt
+            //changer le chemin avant d'executer
+            using (StreamWriter sw = new StreamWriter(@"C: \Users\damdi\OneDrive\Documents\ProjetHopital\Log\hopital.txt"))
+            {
+                sw.WriteLine("Bienvenue dans l'application Hopital");
+            }
         }
     }
 }
