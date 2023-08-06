@@ -10,7 +10,18 @@ namespace ProjetHopital.DAL
 {
     public class DaoVisites
     {
-        public List<Visites> FindAll()
+        public IEnumerable<Visites> FindbyPatient(int id)
+        {
+            var context = new HopitalDBEntities();
+            return context.Visites.Where(v => v.IdPatient == id);
+        }
+
+        public IEnumerable<Visites> FindbyDoc(string name)
+        {
+            var context = new HopitalDBEntities();
+            return context.Visites.Where(v => v.Médecin == name);
+        }
+        public IEnumerable<Visites> FindAll()
         {
             return new HopitalDBEntities().Visites.ToList<Visites>();
         }
@@ -18,33 +29,33 @@ namespace ProjetHopital.DAL
         public Visites FindById(int id)
         {
             var context = new HopitalDBEntities();
-            var a = context.Visites.Find(id);
-            return a;
+            var v = context.Visites.Find(id);
+            return v;
         }
 
         public Visites Delete(int id)
         {
             var context = new HopitalDBEntities();
-            var a = context.Visites.Find(id);
-            context.Visites.Remove(a);
+            var v = context.Visites.Find(id);
+            context.Visites.Remove(v);
             context.SaveChanges();
-            return a;
+            return v;
         }
 
-        public Visites Create(Visites a)
+        public Visites Create(Visites v)
         {
             var context = new HopitalDBEntities();
-            context.Visites.Add(a);
+            context.Visites.Add(v);
             context.SaveChanges();
-            return a;
+            return v;
         }
 
-        public Visites Update(Visites p)
+        public Visites Update(Visites v)
         {
             HopitalDBEntities context = new HopitalDBEntities();
-            context.Entry(p).State = EntityState.Modified;
+            context.Entry(v).State = EntityState.Modified;
             context.SaveChanges();
-            return p;
+            return v;
         }
     }
 }
