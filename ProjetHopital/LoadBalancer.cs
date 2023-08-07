@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,7 +47,7 @@ namespace ProjetHopital
                 //envoyer une mise à jour dans le fichier txt
                 string dateFormat = DateTime.Now.ToString("dd/MM/yyyy");
                 string heureFormat = DateTime.Now.ToString("HH:mm:ss");
-                using (StreamWriter sw = File.AppendText(@"C: \Users\damdi\OneDrive\Documents\ProjetHopital\Log\hopital.txt"))
+                using (StreamWriter sw = File.AppendText(@"..\..\Logs\hopital.txt"))
                 {
                     sw.WriteLine($"Patient : {patient.Nom} Id : {patient.Id} - Date et Heure d'arrivée à l'hopital: {dateFormat} {heureFormat}");
                 }

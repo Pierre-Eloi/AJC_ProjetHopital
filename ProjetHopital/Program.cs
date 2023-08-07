@@ -1,6 +1,7 @@
 ﻿using ProjetHopital.DAL;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -15,12 +16,29 @@ namespace ProjetHopital
             Run();
         }
 
+        static void Test()
+        {
+            try
+            {
+                StreamWriter sw = new StreamWriter(@"..\..\Logs\Test.txt");
+                //Write a line of text
+                sw.WriteLine("Hello World!!");
+                //Write a second line of text
+                sw.WriteLine("From the StreamWriter class");
+                //Close the file
+                sw.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception: " + e.Message);
+            }
+        }
+
 
         static void Run()
         {
             var a = Login();
             ProcessMenuOption(a);
-            hopitalText();
         }
 
         static Authentification Login()
@@ -185,7 +203,8 @@ namespace ProjetHopital
                     break;
                 case 4:
                     var vDoc = new DaoVisites().FindbyDoc(s.DocName);
-                    Console.WriteLine($"\nListe des visites de {s.DocName} - SALLE {s.NumSalle}");
+                    Console.WriteLine($"\nListe des visites de {s.DocName} - SALLE {s.NumSalle}\n" +
+                        $"--------------------------------------");
                     if (vDoc.Count() == 0)
                         Console.WriteLine($"Aucune visite pour vous dans la base Docteur {s.DocName}");
                     else
@@ -296,15 +315,6 @@ namespace ProjetHopital
             }
             Console.WriteLine(msg);
             Console.ForegroundColor = ConsoleColor.White;
-        }
-        static void hopitalText()
-        {
-            //création du fichier hopital.txt
-            //changer le chemin avant d'executer
-            using (StreamWriter sw = new StreamWriter(@"C: \Users\damdi\OneDrive\Documents\ProjetHopital\Log\hopital.txt"))
-            {
-                sw.WriteLine("Bienvenue dans l'application Hopital");
-            }
         }
     }
 }
